@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Transfer</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"     integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+  <link rel="stylesheet" type="text/css" href="./style.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Righteous&family=Roboto+Condensed&display=swap" rel="stylesheet">
+
+</head>
+<body>
+        
+      <main>
+        <br>
+        <button type="button" class="btn btn-primary" onclick="window.location.href = './index.html';">Volver al inicio</button><br>
+        <div id="app" class="container">
+          <h1>Excursiones</h1>
+          <br>
+          <button type="button" class="btn btn-primary" v-on:click="showForm = !showForm">
+            <img src="./images/agregar.png" alt="" class="imgbt">
+          </button>
+                    
+        <br><br>
+    <!-- Add the form below -->
+        <div v-if="showForm">
+          <form style="margin:10px auto ; width: 400px; padding: 20px; display:flex; flex-direction: column; justify-content: space-between;">
+            <!-- Form fields -->
+            <h1>Nueva excursión</h1>
+            <div class="mb-3">
+              <label for="excursion">Excursión</label>
+              <input type="text" name="excursion" id="excursion" v-model="excursion">
+            </div>
+            <div class="mb-3">
+              <label for="cantidad_pasajeros">Cantidad de pasajeros</label>
+              <input type="text" name="cantidad_pasajeros" id="cantidad_pasajeros" v-model="cantidad_pasajeros">
+            </div>
+            <div class="mb-3">
+                <label for="fecha_hora">Fecha y hora</label>
+                <input type="datetime-local" name="fecha_hora" id="fecha_hora" v-model="fecha_hora">
+            </div>
+            
+            <!-- Form submission -->
+            <button type="button" class="btn btn-success" v-on:click="grabar()">Grabar</button>
+          </form>
+        </div>
+            <br><br>
+            <div v-if="error">
+                <p>Error, intente cargar de nuevo</p>
+            </div>
+            <div v-else>
+              <section v-if="cargando">
+                <div class="spinner-border"></div>
+                <p>Cargando ...</p>
+              </section>
+              <section v-else>
+                <div class="table-responsive">
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        
+                        <th scope="col">Hotel</th>
+                        <th scope="col">Excursión</th>
+                        <th scope="col">Cantidad de Pasajeros</th>
+                        <th scope="col">Fecha y hora</th>
+                        <th scope="col">Borrar</th>
+
+
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="" v-for="excursion in excursiones">
+                            <td>{{ excursion.hotel }}</td>
+                            <td>{{ excursion.excursion }}</td>
+                            <td>{{ excursion.cantidad_pasajeros }}</td>
+                            <td>{{ formattedDate(excursion) }}</td>
+                            <td>
+                              <button type="button" class="btn btn-danger" v-on:click="eliminar(excursion)">
+                                <img src="./images/borrar.png" alt="" class="imgbt">
+                              </button>
+                            </td>
+                          </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+            </div>
+        </div>
+    </main>
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>    
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script><!--Link de VUE-->
+    <script src="https://unpkg.com/vue@3"></script>
+
+  <script src="./scripts/excursiones.js"></script>
+
+  
+
+</body>
+</html>

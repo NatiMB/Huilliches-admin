@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+  <title>Transfer</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"     integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+  <link rel="stylesheet" type="text/css" href="./style.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Righteous&family=Roboto+Condensed&display=swap" rel="stylesheet">
+
+</head>
+<body>
+        
+      <main>
+        <br><button type="button" class="btn btn-primary" onclick="window.location.href = './index.html';">Volver al inicio</button><br>
+        <div id="app" class="container">
+          <h1>Transfer</h1>
+          <br>
+          <button type="button" class="btn btn-primary" v-on:click="showForm = !showForm">
+            <img src="./images/agregar.png" alt="" class="imgbt">
+          </button>
+                    
+        <br><br>
+    <!-- Add the form below -->
+        <div v-if="showForm">
+          <form style="margin:10px auto ; width: 400px; padding: 20px; display:flex; flex-direction: column; justify-content: space-between;">
+            <!-- Form fields -->
+            <h1>Nuevo transfer</h1>
+            <div class="mb-3">
+              <label for="fechayhora_in">Fecha y hora In (AAAA-MM-DDTHH:mm:ss)</label>
+              <input type="datetime-local" name="fechayhora_in" id="fechayhora_in" v-model="fechayhora_in" inputmode="decimal">
+            </div>
+            <div class="mb-3">
+              <label for="vuelo_in">Vuelo In</label>
+              <input type="text" name="vuelo_in" id="vuelo_in" v-model="vuelo_in">
+            </div>
+            <div class="mb-3">
+              <label for="fechayhora_out">Fecha y hora Out (AAAA-MM-DDTHH:mm:ss)</label>
+              <input type="datetime-local" name="fechayhora_out" id="fechayhora_out" v-model="fechayhora_out" inputmode="decimal">
+            </div>
+            <div class="mb-3">
+              <label for="vuelo_out">Vuelo Out</label>
+              <input type="text" name="vuelo_out" id="vuelo_out" v-model="vuelo_out">
+            </div>
+            <!-- Form submission -->
+            <button type="button" class="btn btn-success" v-on:click="grabar()">Grabar</button>
+          </form>
+        </div>
+            <br><br>
+            <div v-if="error">
+                <p>Error, intente cargar de nuevo</p>
+            </div>
+            <div v-else>
+              <section v-if="cargando">
+                <div class="spinner-border"></div>
+                <p>Cargando ...</p>
+              </section>
+              <section v-else>
+                <div class="table-responsive">
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        
+                        <th scope="col">Pax</th>
+                        <th scope="col">Hotel</th>
+                        <th scope="col">In</th>
+                        <th scope="col">Vuelo In</th>
+                        <th scope="col">Out</th>
+                        <th scope="col">Vuelo Out</th>
+                        <th scope="col">Borrar</th>
+
+
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="" v-for="transfer in transfers">
+                        <td> {{ transfer.pax }}</td>
+                        <td >{{ transfer.hotel }}</td>
+                        <td>{{ formattedDateIn(transfer) }}</td>
+                        <td>{{ transfer.vuelo_in }}</td>
+                        <td>{{ formattedDateOut(transfer) }}</td>
+                        <td>{{ transfer.vuelo_out }}</td>
+                        <td>
+                          <button type="button" class="btn btn-danger" v-on:click="eliminar(transfer)"><img src="./images/borrar.png" alt="" class="imgbt"></button>
+                        </td>                    
+                      
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+            </div>
+        </div>
+    </main>
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>    
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script><!--Link de VUE-->
+    <script src="https://unpkg.com/vue@3"></script>
+
+  <script src="./scripts/transfers.js"></script>
+
+</body>
+</html>

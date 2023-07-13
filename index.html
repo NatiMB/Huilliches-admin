@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Agencia de Viajes - Reservas</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"     integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+  <link rel="stylesheet" type="text/css" href="./style.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Righteous&family=Roboto+Condensed&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  
+      <main>
+        <div id="app" class="container">
+            <h1>Personas</h1>
+            <br>
+            <a  class="btn btn-primary" href="./nuevapresona.html"><img src="./Images/agregar.png" class="imgbt"></a>
+            <br><br>
+            <div v-if="error">
+                <p>Error, intente cargar de nuevo</p>
+            </div>
+            <div v-else>
+              <section v-if="cargando">
+                <div class="spinner-border"></div>
+                <p>Cargando ...</p>
+              </section>
+              <section v-else>
+                <div class="table-responsive">
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellido</th>
+                        <th scope="col">DNI</th>
+                        <th scope="col">Tel</th>
+                        <th scope="col">Pax</th>
+                        <th scope="col">Hotel</th>
+                        <th scope="col">Acciones</th>
+                        <th scope="col">Transfers</th>
+                        <th scope="col">Excursiones</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="" v-for="persona in personas">
+                        <td scope="row">{{ persona.id }}</td>
+                        <td>{{ persona.nombre }}</td>
+                        <td>{{ persona.apellido }}</td>
+                        <td>{{ persona.dni }}</td>
+                        <td>{{ persona.tel }}</td>
+                        <td>{{ persona.pax }}</td>
+                        <td>{{ persona.hotel }}</td>
+                        <td>
+                          <a class="btn btn-primary" :href="'updatepersona.html?id='+ persona.id" > <img src="./Images/boton-editar.png" alt="editar" class="imgbt"></a>
+                          <button  type="button" class="btn btn-danger" v-on:click="eliminar(persona.id)"><img src="./Images/borrar.png" alt="" class="imgbt"></button>
+                        </td>
+                        <td>
+                          <a class="btn btn-primary" :href="'transfer.html?id=' + persona.id"> <img src="./images/ver.png" alt="ver" class="imgbt"></a>
+                        </td>
+                        <td>
+                          <a class="btn btn-primary" :href="'excursiones.html?id=' + persona.id"> <img src="./images/ver.png" alt="ver" class="imgbt"></a>
+                          
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+            </div>
+        </div>
+    </main>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>    
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script><!--Link de VUE-->
+    <script src="https://unpkg.com/vue@3"></script>
+
+  <script src="./scripts/personas.js"></script>
+
+</body>
+</html>
